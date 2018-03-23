@@ -2,7 +2,10 @@ package befaster.solutions.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Basket {
     private final Pricing pricing;
@@ -23,7 +26,15 @@ public class Basket {
     }
 
     public int calculateTotalDiscount() {
-        return 20;
+        final Map<SKU, Long> skusAndNumberOfItems = skuSkus
+                .stream()
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        
+        return skusAndNumberOfItems.entrySet()
+                .stream()
+                .mapToInt(entry ->
+                        pricing.calculateDiscountFor(entry.getKey(), entry.getValue().intValue())
+                ).sum();
     }
 
     public Integer totalCost() {

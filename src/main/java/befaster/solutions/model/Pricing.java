@@ -2,6 +2,7 @@ package befaster.solutions.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class Pricing {
     private static final Map<SKU, Integer> priceTable = new HashMap<>();
@@ -17,4 +18,14 @@ public class Pricing {
         return priceTable.get(sku);
     }
 
+    public int calculateDiscountFor(SKU key, int amount) {
+        final Optional<SKU> skuWithDiscount = priceTable.keySet()
+                .stream()
+                .filter(k -> k.equals(key))
+                .findFirst();
+
+        final AmountDiscount amountDiscount = skuWithDiscount.get().getAmountDiscount();
+
+        return amountDiscount.calculate(amount);
+    }
 }

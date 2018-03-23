@@ -33,4 +33,8 @@ public class SKU {
 
         return Objects.hash(skuName);
     }
+
+    public AmountDiscount getAmountDiscount() {
+        return amountDiscount;
+    }
 }
