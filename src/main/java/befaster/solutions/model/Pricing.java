@@ -25,10 +25,13 @@ public class Pricing {
     }
 
     public int calculateDiscountFor(SKU key, int amount) {
-        final Optional<List<Discount>> optionalDiscountList = findSkuFromMap(key).
-                map(SKU::getDiscounts);
-        return optionalDiscountList.map(discountList ->
-                discountList.stream().mapToInt(discount -> discount.calculate(amount)).sum()
+       return findSkuFromMap(key).
+                map(SKU::getDiscounts)
+               .map(discountList ->
+                       discountList.stream()
+                       .mapToInt(discount -> discount.calculate(amount))
+                               .collect(Collectors.maxBy())
+                       .sum()
         ).orElse(0);
     }
 
