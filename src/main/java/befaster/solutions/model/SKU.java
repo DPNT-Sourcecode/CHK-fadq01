@@ -5,16 +5,16 @@ import java.util.Objects;
 public class SKU {
 
     private final String skuName;
-    private static int unitPrice;
+    private final int unitPrice;
     private Discount discount;
 
-    private SKU(String skuName) {
+    private SKU(String skuName, int unitPrice) {
         this.skuName = skuName;
+        this.unitPrice = unitPrice;
     }
 
     public static SKU skuOf(String name, int unitPrice) {
-        SKU.unitPrice = unitPrice;
-        return new SKU(name);
+        return new SKU(name, unitPrice);
     }
 
     public SKU withDiscount(Discount amountDiscount) {
@@ -42,5 +42,9 @@ public class SKU {
 
     public boolean hasDiscount() {
         return discount != null;
+    }
+
+    public int getUnitPrice() {
+        return unitPrice;
     }
 }
