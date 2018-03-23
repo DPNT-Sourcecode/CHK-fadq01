@@ -1,12 +1,14 @@
 package befaster.solutions.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class SKU {
 
     private final String skuName;
     private final int unitPrice;
-    private Discount discount;
+    private List<Discount> discounts = new ArrayList<>();
 
     private SKU(String skuName, int unitPrice) {
         this.skuName = skuName;
@@ -18,8 +20,20 @@ public class SKU {
     }
 
     public SKU withDiscount(Discount amountDiscount) {
-        this.discount = amountDiscount;
+        discounts.add(amountDiscount);
         return this;
+    }
+
+    public List<Discount> getDiscounts() {
+        return discounts;
+    }
+
+    public boolean hasDiscount() {
+        return discounts.size() != 0;
+    }
+
+    public int getUnitPrice() {
+        return unitPrice;
     }
 
     @Override
@@ -34,17 +48,5 @@ public class SKU {
     public int hashCode() {
 
         return Objects.hash(skuName);
-    }
-
-    public Discount getDiscount() {
-        return discount;
-    }
-
-    public boolean hasDiscount() {
-        return discount != null;
-    }
-
-    public int getUnitPrice() {
-        return unitPrice;
     }
 }
