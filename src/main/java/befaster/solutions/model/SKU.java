@@ -49,4 +49,4 @@ public class SKU {
         return Objects.hash(skuName);
     }
 
-}
+}

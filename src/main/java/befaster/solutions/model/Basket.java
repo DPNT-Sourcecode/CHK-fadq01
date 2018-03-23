@@ -36,4 +36,4 @@ public class Basket {
     public Integer totalCost() {
         return skuList.stream().mapToInt(pricing::priceFor).sum();
     }
-}
+}
