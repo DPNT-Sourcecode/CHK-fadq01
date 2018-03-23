@@ -31,7 +31,7 @@ public class SKU {
     public int calculateDiscount() {
         return discounts.stream()
                 .filter(Discount::applies)
-                .mapToInt(discount -> discount.calculate(amount))
+                .mapToInt(discount -> discount.calculate(0))
                 .max()
                 .orElse(0);
 
