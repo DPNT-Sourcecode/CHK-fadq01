@@ -29,7 +29,7 @@ public class CheckoutTest {
 
     @Test
     public void discountItemsHaveAnotherDiscountAsWell() {
-        assertThat(Checkout.checkout("AAAAA"), equalTo(200));
+        assertThat(Checkout.checkout("AAAAAA"), equalTo(250));
     }
 
     @Test
