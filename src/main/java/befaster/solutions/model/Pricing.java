@@ -16,7 +16,7 @@ public class Pricing {
 
     public int priceFor(SKU sku) {
         if (!validSku(sku)) {
-            return -1;
+            throw new IllegalArgumentException("invalid sku");
         }
         return priceTable.get(sku);
     }
@@ -37,4 +37,4 @@ public class Pricing {
                 .filter(mapKey -> mapKey.equals(key))
                 .findFirst();
     }
-}
+}

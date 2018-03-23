@@ -34,6 +34,6 @@ public class CheckoutTest {
 
     @Test
     public void itemNotFound(){
-        assertThat(Checkout.checkout("a"), equalTo(-1));
+        assertThat(Checkout.checkout("AxA"), equalTo(-1));
     }
 }

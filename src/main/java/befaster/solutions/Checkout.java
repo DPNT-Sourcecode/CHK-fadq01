@@ -8,8 +8,11 @@ public class Checkout {
 
     public static Integer checkout(String skus) {
         Basket basket = new Basket(skus, new Pricing());
-
-        return basket.totalCost() - basket.calculateTotalDiscount();
+        try {
+            return basket.totalCost() - basket.calculateTotalDiscount();
+        } catch (Exception e) {
+            return -1;
+        }
     }
 
-}
+}
