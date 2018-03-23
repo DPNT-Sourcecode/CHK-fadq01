@@ -37,4 +37,8 @@ public class SKU {
     public AmountDiscount getAmountDiscount() {
         return amountDiscount;
     }
+
+    public boolean hasDiscount() {
+        return amountDiscount != null;
+    }
 }

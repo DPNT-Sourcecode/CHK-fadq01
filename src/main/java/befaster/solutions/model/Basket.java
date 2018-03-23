@@ -29,11 +29,11 @@ public class Basket {
         final Map<SKU, Long> skusAndNumberOfItems = skuSkus
                 .stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        
+
         return skusAndNumberOfItems.entrySet()
                 .stream()
-                .mapToInt(entry ->
-                        pricing.calculateDiscountFor(entry.getKey(), entry.getValue().intValue())
+                .filter(entry -> !entry.getKey().hasDiscount() )
+                .mapToInt(entry -> pricing.calculateDiscountFor(entry.getKey(), entry.getValue().intValue())
                 ).sum();
     }
 
