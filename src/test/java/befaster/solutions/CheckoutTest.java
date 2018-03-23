@@ -29,6 +29,11 @@ public class CheckoutTest {
 
     @Test
     public void discountPricingAppliedForOtherItems() {
-        assertThat(Checkout.checkout("B B B B A A A A C"), equalTo(240));
+        assertThat(Checkout.checkout("B B B B A A A C"), equalTo(240));
+    }
+
+    @Test
+    public void itemNotFound(){
+        assertThat(Checkout.checkout("a"), equalTo(-1));
     }
 }
