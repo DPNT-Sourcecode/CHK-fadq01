@@ -1,6 +1,5 @@
 package befaster.solutions.model;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -26,13 +25,12 @@ public class Pricing {
     }
 
     public int calculateDiscountFor(SKU key, int amount) {
-       return findSkuFromMap(key).
+        return findSkuFromMap(key).
                 map(SKU::getDiscounts)
-               .map(discountList ->
-                       discountList.stream()
-                       .mapToInt(discount -> discount.calculate(amount)).max()
-                               .getAsInt()
-        ).orElse(0);
+                .map(discountList -> discountList.stream()
+                        .mapToInt(discount -> discount.calculate(amount)).max()
+                        .orElse(0)
+                ).orElse(0);
     }
 
     private Optional<SKU> findSkuFromMap(SKU key) {
