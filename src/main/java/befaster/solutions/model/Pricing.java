@@ -1,5 +1,6 @@
 package befaster.solutions.model;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -30,7 +31,12 @@ public class Pricing {
                .map(discountList ->
                        discountList.stream()
                        .mapToInt(discount -> discount.calculate(amount))
-                               .collect(Collectors.maxBy())
+                               .collect(Collectors.maxBy(new Comparator<Integer>() {
+                                   @Override
+                                   public int compare(Integer o1, Integer o2) {
+                                       return 0;
+                                   }
+                               }))
                        .sum()
         ).orElse(0);
     }
