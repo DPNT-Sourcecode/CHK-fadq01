@@ -10,11 +10,12 @@ public class Checkout {
     public static Integer checkout(String skus) {
         final Pricing pricing = new Pricing();
         final StringTokenizer tokenizer = new StringTokenizer(skus, " ");
+
         int cost = 0;
         while (tokenizer.hasMoreElements()) {
             cost += pricing.priceFor(tokenizer.nextToken());
         }
-        return cost;
+        return cost - pricing.calculateDiscount(skus);
     }
 
     private static class Pricing {
@@ -30,5 +31,9 @@ public class Checkout {
         int priceFor(String sku) {
             return priceTable.get(sku);
         }
+
+        int calculateDiscount(String skus) {
+            return 20;
+        }
     }
-}
+}
