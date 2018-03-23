@@ -1,39 +1,15 @@
 package befaster.solutions;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
+import befaster.solutions.model.Basket;
+import befaster.solutions.model.Pricing;
 
 public class Checkout {
 
 
     public static Integer checkout(String skus) {
-        final Pricing pricing = new Pricing();
-        final StringTokenizer tokenizer = new StringTokenizer(skus, " ");
+        Basket basket = new Basket(skus, new Pricing());
 
-        int cost = 0;
-        while (tokenizer.hasMoreElements()) {
-            cost += pricing.priceFor(tokenizer.nextToken());
-        }
-        return cost - pricing.calculateDiscount(skus);
+        return basket.totalCost() - basket.calculateTotalDiscount();
     }
 
-    private static class Pricing {
-        private static final Map<String, Integer> priceTable = new HashMap<>();
-
-        static {
-            priceTable.put("A", 50);
-            priceTable.put("B", 30);
-            priceTable.put("C", 20);
-            priceTable.put("D", 15);
-        }
-
-        int priceFor(String sku) {
-            return priceTable.get(sku);
-        }
-
-        int calculateDiscount(String skus) {
-            return 20;
-        }
-    }
 }

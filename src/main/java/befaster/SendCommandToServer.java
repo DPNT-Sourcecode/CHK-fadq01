@@ -30,8 +30,8 @@ public class SendCommandToServer {
      *
      *   By running this file you interact with a challenge server.
      *   The interaction follows a request-response pattern:
-     *        * You are presented with your current progress and a list of actions.
-     *        * You trigger one of the actions by typing it on the console.
+     *        * You are presented with your current progress and a list skuOf actions.
+     *        * You trigger one skuOf the actions by typing it on the console.
      *        * After the action feedback is presented, the execution will stop.
      *
      *   +------+-------------------------------------------------------------+
