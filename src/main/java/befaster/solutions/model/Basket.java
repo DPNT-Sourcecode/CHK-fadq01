@@ -15,22 +15,7 @@ public class Basket {
     }
 
     public int calculateTotalDiscount() {
-        final Map<SKU, Long> skusAndNumberOfItems = skuList
-                .stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-
-        return skusAndNumberOfItems.entrySet()
-                .stream()
-                .filter(entry -> {
-                    final SKU sku = entry.getKey();
-                    return !sku.hasDiscount();
-                })
-                .mapToInt(entry -> {
-                    final SKU sku1 = entry.getKey();
-                    final Long amount = entry.getValue();
-
-                    return sku1.calculateDiscount(amount.intValue());
-                }).sum();
+      return skuList.stream().mapToInt(SKU::calculateDiscount).sum();
     }
 
     public Integer totalCost() {

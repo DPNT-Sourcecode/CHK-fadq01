@@ -24,15 +24,11 @@ public class SKU {
         return this;
     }
 
-    public boolean hasDiscount() {
-        return discounts.size() != 0;
-    }
-
     public int getUnitPrice() {
         return unitPrice;
     }
 
-    public int calculateDiscount(int amount) {
+    public int calculateDiscount() {
         return discounts.stream()
                 .filter(Discount::applies)
                 .mapToInt(discount -> discount.calculate(amount))
