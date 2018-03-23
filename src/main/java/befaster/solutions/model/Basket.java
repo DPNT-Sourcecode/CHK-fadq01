@@ -3,7 +3,6 @@ package befaster.solutions.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -16,11 +15,10 @@ public class Basket {
         this.pricing = pricing;
     }
 
-    private List<SKU> parseSkus(String skus) {
-        final StringTokenizer tokenizer = new StringTokenizer(skus, " ");
+    private static List<SKU> parseSkus(String skus) {
         final List<SKU> skuList = new ArrayList<>();
-        while (tokenizer.hasMoreElements()) {
-            skuList.add(SKU.skuOf(tokenizer.nextToken()));
+        for (int index = 0; index < skus.length(); index++) {
+            skuList.add(SKU.skuOf(skus.substring(index)));
         }
         return skuList;
     }
@@ -39,4 +37,4 @@ public class Basket {
     public Integer totalCost() {
         return skuSkus.stream().mapToInt(pricing::priceFor).sum();
     }
-}
+}

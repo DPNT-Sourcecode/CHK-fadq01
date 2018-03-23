@@ -14,22 +14,22 @@ public class CheckoutTest {
 
     @Test
     public void moreThanOneItemInShoppingBasketReturnsCorrectPrice() {
-        assertThat(Checkout.checkout("A A"), equalTo(100));
+        assertThat(Checkout.checkout("AA"), equalTo(100));
     }
 
     @Test
     public void itemsWithDifferentSKUsReturnCorrectPrice() {
-        assertThat(Checkout.checkout("A B C D"), equalTo(115));
+        assertThat(Checkout.checkout("ABCD"), equalTo(115));
     }
 
     @Test
     public void discountPricingApplied() {
-        assertThat(Checkout.checkout("A A A"), equalTo(130));
+        assertThat(Checkout.checkout("AAA"), equalTo(130));
     }
 
     @Test
     public void discountPricingAppliedForOtherItems() {
-        assertThat(Checkout.checkout("B B B B A A A C"), equalTo(240));
+        assertThat(Checkout.checkout("BBBBAAAC"), equalTo(240));
     }
 
     @Test
