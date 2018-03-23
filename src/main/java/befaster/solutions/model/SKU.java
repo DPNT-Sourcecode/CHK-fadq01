@@ -46,7 +46,7 @@ public class SKU {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(skuName);
     }
-}
+
+}

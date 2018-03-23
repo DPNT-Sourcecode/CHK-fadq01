@@ -8,11 +8,13 @@ import java.util.stream.Collectors;
 
 public class Basket {
     private final Pricing pricing;
-    private final List<SKU> skuSkus;
+    private final List<SKU> skuList;
+    private final DiscountCalculator discountCalculator;
 
     public Basket(final String skus, final Pricing pricing) {
-        this.skuSkus = parseSkus(skus);
+        this.skuList = parseSkus(skus);
         this.pricing = pricing;
+        this.discountCalculator = new DiscountCalculator(skuList);
     }
 
     private static List<SKU> parseSkus(String skus) {
@@ -24,17 +26,14 @@ public class Basket {
     }
 
     public int calculateTotalDiscount() {
-        final Map<SKU, Long> skusAndNumberOfItems = skuSkus
+        final Map<SKU, Long> skusAndNumberOfItems = skuList
                 .stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        return skusAndNumberOfItems.entrySet()
-                .stream()
-                .filter(entry -> !entry.getKey().hasDiscount())
-                .mapToInt(entry -> pricing.calculateDiscountFor(entry.getKey(), entry.getValue().intValue())).sum();
+        return discountCalculator.calculateDiscount(skusAndNumberOfItems);
     }
 
     public Integer totalCost() {
-        return skuSkus.stream().mapToInt(pricing::priceFor).sum();
+        return skuList.stream().mapToInt(pricing::priceFor).sum();
     }
-}
+}

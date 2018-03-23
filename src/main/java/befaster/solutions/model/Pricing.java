@@ -24,20 +24,21 @@ public class Pricing {
         return skuMap.containsKey(sku);
     }
 
-    public int calculateDiscountFor(SKU key, int amount) {
-        return findSkuFromMap(key).
-                map(SKU::getDiscounts)
-                .map(discountList ->
-                        discountList.stream().mapToInt(discount -> discount.calculate(amount))
-                                .max()
-                        .orElse(0)
-                ).orElse(0);
-    }
-
-    private Optional<SKU> findSkuFromMap(SKU key) {
-        return skuMap.keySet()
-                .stream()
-                .filter(mapKey -> mapKey.equals(key))
-                .findFirst();
-    }
-}
+//    public int calculateDiscountFor(SKU key, int amount) {
+//        return findSkuFromMap(key).
+//                map(SKU::getDiscounts)
+//                .map(discountList ->
+//                        discountList.stream()
+//                                .mapToInt(discount -> discount.calculate(amount))
+//                                .max()
+//                        .orElse(0)
+//                ).orElse(0);
+//    }
+//
+//    private Optional<SKU> findSkuFromMap(SKU key) {
+//        return skuMap.keySet()
+//                .stream()
+//                .filter(mapKey -> mapKey.equals(key))
+//                .findFirst();
+//    }
+}
