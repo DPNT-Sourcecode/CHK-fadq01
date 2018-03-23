@@ -8,10 +8,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Pricing {
-    private final Map<SKU, SKU> skuMap = new HashMap<>();
+    private final Map<SKU, List<SKU>> skuMap;
 
     public Pricing(List<SKU> skus) {
-        skuMap = skus.stream().collect(Collectors.groupingBy(Function.identity(), Function.identity()));
+        this.skuMap = skus.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.reducing()));
     }
 
     public int priceFor(SKU sku) {
