@@ -31,12 +31,7 @@ public class Pricing {
                .map(discountList ->
                        discountList.stream()
                        .mapToInt(discount -> discount.calculate(amount))
-                               .collect(Collectors.maxBy(new Comparator<Integer>() {
-                                   @Override
-                                   public int compare(Integer o1, Integer o2) {
-                                       return 0;
-                                   }
-                               }))
+                               .collect(Collectors.maxBy(Comparator.comparingInt()))
                        .sum()
         ).orElse(0);
     }
