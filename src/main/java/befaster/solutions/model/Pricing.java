@@ -15,7 +15,14 @@ public class Pricing {
     }
 
     public int priceFor(SKU sku) {
+        if (!validSku(sku)) {
+            return -1;
+        }
         return priceTable.get(sku);
+    }
+
+    private boolean validSku(SKU sku) {
+        return priceTable.containsKey(sku);
     }
 
     public int calculateDiscountFor(SKU key, int amount) {
@@ -30,4 +37,4 @@ public class Pricing {
                 .filter(mapKey -> mapKey.equals(key))
                 .findFirst();
     }
-}
+}
