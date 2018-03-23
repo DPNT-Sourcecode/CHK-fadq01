@@ -3,9 +3,10 @@ package befaster.solutions;
 
 public class Hello {
     public static String hello(String friendName) {
-        if (friendName != null) {
-            return "Hello, " + friendName + "!";
+        final String defaultName = "World";
+        if (friendName == null) {
+            friendName = defaultName;
         }
-        return "Hello, World!";
+        return String.format("Hello, %s!", friendName);
     }
 }
