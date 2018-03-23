@@ -9,6 +9,6 @@ public class HelloWorld {
 
     @Test
     public void sayHelloToTheWorld() {
-        assertThat(Hello.hello(null), equalTo("Hello World"));
+        assertThat(Hello.hello(null), equalTo("hello to the world"));
     }
 }
