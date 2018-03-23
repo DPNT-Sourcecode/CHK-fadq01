@@ -9,7 +9,7 @@ public class Pricing {
 
     static {
         priceTable.put(SKU.skuOf("A").withDiscount(new AmountDiscount(3, 20)), 50);
-        priceTable.put(SKU.skuOf("B").withDiscount(new AmountDiscount(2, 45)), 30);
+        priceTable.put(SKU.skuOf("B").withDiscount(new AmountDiscount(2, 15)), 30);
         priceTable.put(SKU.skuOf("C"), 20);
         priceTable.put(SKU.skuOf("D"), 15);
     }
