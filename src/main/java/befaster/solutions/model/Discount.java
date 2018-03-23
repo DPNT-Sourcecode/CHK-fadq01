@@ -1,4 +1,5 @@
 package befaster.solutions.model;
 
-public class Discount {
+public interface Discount {
+    int calculate(int forAmount);
 }

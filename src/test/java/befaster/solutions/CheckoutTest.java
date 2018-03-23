@@ -26,14 +26,15 @@ public class CheckoutTest {
     public void discountPricingApplied() {
         assertThat(Checkout.checkout("AAA"), equalTo(130));
     }
-    @Test
-    public void oneItemFreeDiscount() {
-        assertThat(Checkout.checkout("EEB"), equalTo(80));
-    }
 
     @Test
     public void discountPricingAppliedForOtherItems() {
         assertThat(Checkout.checkout("BBBBAAAC"), equalTo(240));
+    }
+
+    @Test
+    public void oneItemFreeDiscount() {
+        assertThat(Checkout.checkout("EEB"), equalTo(80));
     }
 
     @Test

@@ -5,18 +5,20 @@ import java.util.Objects;
 public class SKU {
 
     private final String skuName;
-    private AmountDiscount amountDiscount;
+    private static int unitPrice;
+    private Discount discount;
 
     private SKU(String skuName) {
         this.skuName = skuName;
     }
 
-    public static SKU skuOf(String name) {
+    public static SKU skuOf(String name, int unitPrice) {
+        SKU.unitPrice = unitPrice;
         return new SKU(name);
     }
 
-    public SKU withDiscount(AmountDiscount amountDiscount) {
-        this.amountDiscount = amountDiscount;
+    public SKU withDiscount(Discount amountDiscount) {
+        this.discount = amountDiscount;
         return this;
     }
 
@@ -34,11 +36,11 @@ public class SKU {
         return Objects.hash(skuName);
     }
 
-    public AmountDiscount getAmountDiscount() {
-        return amountDiscount;
+    public Discount getDiscount() {
+        return discount;
     }
 
     public boolean hasDiscount() {
-        return amountDiscount != null;
+        return discount != null;
     }
 }

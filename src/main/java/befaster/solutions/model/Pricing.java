@@ -1,38 +1,39 @@
 package befaster.solutions.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Pricing {
-    private static final Map<SKU, Integer> priceTable = new HashMap<>();
+    private final Map<SKU, SKU> skuMap = new HashMap<>();
 
-    static {
-        priceTable.put(SKU.skuOf("A").withDiscount(new AmountDiscount(3, 20)), 50);
-        priceTable.put(SKU.skuOf("B").withDiscount(new AmountDiscount(2, 15)), 30);
-        priceTable.put(SKU.skuOf("C"), 20);
-        priceTable.put(SKU.skuOf("D"), 15);
+    public Pricing(List<SKU> skus) {
+        skuMap = skus.stream().collect(Collectors.groupingBy(Function.identity(), Function.identity()));
     }
 
     public int priceFor(SKU sku) {
         if (!validSku(sku)) {
             throw new IllegalArgumentException("invalid sku");
         }
-        return priceTable.get(sku);
+        return skuMap.get(sku);
     }
 
     private boolean validSku(SKU sku) {
-        return priceTable.containsKey(sku);
+        return skuMap.containsKey(sku);
     }
 
     public int calculateDiscountFor(SKU key, int amount) {
         return findSkuFromMap(key).
-                map(SKU::getAmountDiscount)
-                .map(amountDiscount -> amountDiscount.calculate(amount)).orElse(0);
+                map(SKU::getDiscount)
+                .map(amountDiscount -> amountDiscount.calculate(amount))
+                .orElse(0);
     }
 
     private Optional<SKU> findSkuFromMap(SKU key) {
-        return priceTable.keySet()
+        return skuMap.keySet()
                 .stream()
                 .filter(mapKey -> mapKey.equals(key))
                 .findFirst();

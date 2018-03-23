@@ -1,6 +1,6 @@
 package befaster.solutions.model;
 
-public class AmountDiscount {
+public class AmountDiscount implements Discount {
     private final int amount;
     private final int discount;
 
