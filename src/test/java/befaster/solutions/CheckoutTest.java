@@ -17,4 +17,9 @@ public class CheckoutTest {
         assertThat(Checkout.checkout("A A"), equalTo(100));
     }
 
+    @Test
+    public void itemsWithDifferentSKUsReturnCorrectPrice() {
+        assertThat(Checkout.checkout("A B C D"), equalTo(115));
+    }
+
 }
