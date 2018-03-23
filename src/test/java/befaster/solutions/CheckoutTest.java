@@ -27,4 +27,8 @@ public class CheckoutTest {
         assertThat(Checkout.checkout("A A A"), equalTo(130));
     }
 
+    @Test
+    public void discountPricingAppliedForOtherItems() {
+        assertThat(Checkout.checkout("B B"), equalTo(45));
+    }
 }

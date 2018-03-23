@@ -32,12 +32,11 @@ public class Basket {
 
         return skusAndNumberOfItems.entrySet()
                 .stream()
-                .filter(entry -> !entry.getKey().hasDiscount() )
-                .mapToInt(entry -> pricing.calculateDiscountFor(entry.getKey(), entry.getValue().intValue())
-                ).sum();
+                .filter(entry -> !entry.getKey().hasDiscount())
+                .mapToInt(entry -> pricing.calculateDiscountFor(entry.getKey(), entry.getValue().intValue())).sum();
     }
 
     public Integer totalCost() {
         return skuSkus.stream().mapToInt(pricing::priceFor).sum();
     }
-}
+}
