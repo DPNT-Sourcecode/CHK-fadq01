@@ -27,8 +27,9 @@ public class Pricing {
     public int calculateDiscountFor(SKU key, int amount) {
         return findSkuFromMap(key).
                 map(SKU::getDiscounts)
-                .map(discountList -> discountList.stream()
-                        .mapToInt(discount -> discount.calculate(amount)).max()
+                .map(discountList ->
+                        discountList.stream().mapToInt(discount -> discount.calculate(amount))
+                                .max()
                         .orElse(0)
                 ).orElse(0);
     }
