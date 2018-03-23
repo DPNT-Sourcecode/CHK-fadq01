@@ -28,6 +28,11 @@ public class CheckoutTest {
     }
 
     @Test
+    public void discountItemsHaveAnotherDiscountAsWell() {
+        assertThat(Checkout.checkout("AAAAA"), equalTo(130));
+    }
+
+    @Test
     public void discountPricingAppliedForOtherItems() {
         assertThat(Checkout.checkout("BBBBAAAC"), equalTo(240));
     }
@@ -39,7 +44,7 @@ public class CheckoutTest {
 
     @Test
     public void oneItemFreeAlsoTwoForOne() {
-        assertThat(Checkout.checkout("EEBB"), equalTo(100));
+        assertThat(Checkout.checkout("EEBB"), equalTo(95));
     }
 
     @Test
