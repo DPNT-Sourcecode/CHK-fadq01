@@ -24,7 +24,7 @@ public class CheckoutTest {
 
     @Test
     public void discountPricingApplied() {
-        assertThat(Checkout.checkout("3A"), equalTo(130));
+        assertThat(Checkout.checkout("A A A"), equalTo(130));
     }
 
 }
