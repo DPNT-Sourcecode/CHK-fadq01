@@ -30,9 +30,8 @@ public class Pricing {
                 map(SKU::getDiscounts)
                .map(discountList ->
                        discountList.stream()
-                       .mapToInt(discount -> discount.calculate(amount))
-                               .collect(Collectors.maxBy(Comparator.comparingInt()))
-                       .sum()
+                       .mapToInt(discount -> discount.calculate(amount)).max()
+                               .getAsInt()
         ).orElse(0);
     }
 
