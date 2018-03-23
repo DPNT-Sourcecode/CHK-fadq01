@@ -38,6 +38,11 @@ public class CheckoutTest {
     }
 
     @Test
+    public void oneItemFreeAlsoTwoForOne() {
+        assertThat(Checkout.checkout("EEBB"), equalTo(100));
+    }
+
+    @Test
     public void itemNotFound(){
         assertThat(Checkout.checkout("AxA"), equalTo(-1));
     }
