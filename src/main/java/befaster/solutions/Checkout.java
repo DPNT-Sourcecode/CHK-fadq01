@@ -9,6 +9,7 @@ public class Checkout {
 
 
     public static Integer checkout(String skus) {
+        final List<SKU> parseSkus = SkuParser.parseSkus(skus);
         final SKU skuB = SKU.skuOf("B", 30).withDiscount(new AmountDiscount(2, 15));
 
         List<SKU> priceList = ImmutableList.of(skuB,
@@ -17,9 +18,9 @@ public class Checkout {
                         .withDiscount(new AmountDiscount(5, 50)),
                 SKU.skuOf("C", 20),
                 SKU.skuOf("D", 15),
-                SKU.skuOf("E", 40).withDiscount(new ProductDiscount(2, skuB)));
+                SKU.skuOf("E", 40).withDiscount(new ProductDiscount(2, skuB, parseSkus)));
 
-        Basket basket = new Basket(skus, new Pricing(priceList));
+        Basket basket = new Basket(parseSkus, new Pricing(priceList));
         try {
             return basket.totalCost() - basket.calculateTotalDiscount();
         } catch (Exception e) {

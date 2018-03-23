@@ -24,10 +24,6 @@ public class SKU {
         return this;
     }
 
-    public List<Discount> getDiscounts() {
-        return discounts;
-    }
-
     public boolean hasDiscount() {
         return discounts.size() != 0;
     }
@@ -35,6 +31,16 @@ public class SKU {
     public int getUnitPrice() {
         return unitPrice;
     }
+
+    public int calculateDiscount(int amount) {
+        return discounts.stream()
+                .filter(Discount::applies)
+                .mapToInt(discount -> discount.calculate(amount))
+                .max()
+                .orElse(0);
+
+    }
+
 
     @Override
     public boolean equals(Object o) {

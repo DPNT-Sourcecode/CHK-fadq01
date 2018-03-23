@@ -12,4 +12,9 @@ public class AmountDiscount implements Discount {
     public int calculate(int forAmount) {
         return (forAmount / amount) * discount;
     }
+
+    @Override
+    public boolean applies() {
+        return true;
+    }
 }
